@@ -1,0 +1,160 @@
+set runtimepath+=/Applications/Lilypond.app/Contents/Resources/share/lilypond/current/vim/
+
+set hidden
+
+let mapleader=","
+
+nnoremap <Leader>w <C-w>v<C-w>l
+nnoremap <Leader>s <C-w>s<C-w>j
+nnoremap <Leader><space> :noh<CR>
+
+" don't write backups
+set updatecount=0
+set nobackup
+set nowritebackup
+
+set cindent
+set smartindent
+set autoindent
+set ai
+
+set softtabstop=2
+set smarttab
+
+"set listchars=tab:▸\ ,eol:¬
+
+set gfn=AnonymousPro:h12
+set vb
+
+set guioptions-=R
+set guioptions-=r
+set guioptions-=L
+set guioptions-=l
+set guioptions-=T
+
+set relativenumber
+
+color ir_black
+
+" tab/space characters
+highlight NonText guifg=#4a4a59
+highlight SpecialKey guifg=#414159
+
+nnoremap j gj
+nnoremap k gk
+
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
+
+" map ,, :call RetabAll()<CR>
+map <leader>d ysiw"
+
+function! RetabAll()
+  set noexpandtab
+  retab!
+  set expandtab
+  retab!
+endfunction
+
+" search
+set showmatch
+
+" autosave
+" au FocusLost * :wa
+
+" colwidth
+set wrap
+set textwidth=79
+set colorcolumn=100
+
+"map <leader>c :call RubyCommentdwim()<CR>
+
+" want to find a way to generalize this so I can pass in a character to use as
+" comment based on language. But for now, Ruby pretty much covers it...
+function! RubyCommentdwim()
+  let line_no = line('.')
+  call cursor(line_no, 1)
+  let c = getline(".")[col(".")-1]
+  if c =~ "#"
+    s/# //
+  else
+    s/\(.*$\)/# \1/
+  endif
+endfunction
+
+if &term =~ "xterm"
+  if has("terminfo")
+    set t_Co=8
+    set t_Sf=^[[3%p1%dm
+    set t_Sb=^[[4%p1%dm
+  else
+    set t_Co=8
+    set t_Sf=^[[3%dm
+    set t_Sb=^[[4%dm
+  endif
+endif
+
+" jj > <ESC>
+imap jj <ESC>
+imap JJ <ESC>
+
+" search and center
+map n nzz
+map N Nzz
+
+" statusline
+set statusline=%f\ %y%m%=%c\ %l/%L
+
+" rails.vim shortcuts
+
+function! BufSel(pattern)
+  let bufcount = bufnr("$")
+  let currbufnr = 1
+  let nummatches = 0
+  let firstmatchingbufnr = 0
+  while currbufnr <= bufcount
+    if(bufexists(currbufnr))
+      let currbufname = bufname(currbufnr)
+      if(match(currbufname, a:pattern) > -1)
+        echo currbufnr . ": ". bufname(currbufnr)
+        let nummatches += 1
+        let firstmatchingbufnr = currbufnr
+      endif
+    endif
+    let currbufnr = currbufnr + 1
+  endwhile
+  if(nummatches == 1)
+    execute ":buffer ". firstmatchingbufnr
+  elseif(nummatches > 1)
+    let desiredbufnr = input("Enter buffer number: ")
+    if(strlen(desiredbufnr) != 0)
+      execute ":buffer ". desiredbufnr
+    endif
+  else
+    echo "No matching buffers"
+  endif
+endfunction
+
+"Bind the BufSel() function to a user-command
+command! -nargs=1 Bs :call BufSel("<args>")
+
+" TOHtml
+let html_use_css=1
+let html_number_lines=0
+let html_no_pre=1
+
+set wildchar=<Tab> wildmenu wildmode=full
+
+" Show highlighting groups
+nmap <C-S-P> :call <SID>SynStack()<CR>
+function! <SID>SynStack()
+  if !exists("*synstack")
+    return
+  endif
+  echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
+endfunc
+
+:set noeol
+" :set binary
