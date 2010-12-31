@@ -4,6 +4,12 @@ set number
 set ruler
 syntax on
 
+" Pathogen
+call pathogen#helptags()
+call pathogen#runtime_append_all_bundles()
+
+runtime macros/matchit.vim
+
 " Whitespace stuff
 set nowrap
 set tabstop=2
@@ -25,6 +31,9 @@ set wildignore+=*.o,*.obj,.git,*.rbc
 " Status bar
 set laststatus=2
 
+" set leader to comma
+let mapleader=","
+
 " Without setting this, ZoomWin restores windows in a way that causes
 " equalalways behavior to be triggered the next time CommandT is used.
 " This is likely a bludgeon to solve some other issue, but it works
@@ -39,6 +48,8 @@ let g:CommandTMaxHeight=20
 
 " ZoomWin configuration
 map <Leader><Leader> :ZoomWin<CR>
+
+map <Leader>c <plug>NerdCommenterComment
 
 " CTags
 map <Leader>rt :!ctags --extra=+f -R *<CR><CR>
