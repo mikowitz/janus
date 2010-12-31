@@ -69,21 +69,6 @@ set wrap
 set textwidth=79
 set colorcolumn=100
 
-"map <leader>c :call RubyCommentdwim()<CR>
-
-" want to find a way to generalize this so I can pass in a character to use as
-" comment based on language. But for now, Ruby pretty much covers it...
-function! RubyCommentdwim()
-  let line_no = line('.')
-  call cursor(line_no, 1)
-  let c = getline(".")[col(".")-1]
-  if c =~ "#"
-    s/# //
-  else
-    s/\(.*$\)/# \1/
-  endif
-endfunction
-
 if &term =~ "xterm"
   if has("terminfo")
     set t_Co=8

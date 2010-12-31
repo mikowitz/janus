@@ -49,7 +49,9 @@ let g:CommandTMaxHeight=20
 " ZoomWin configuration
 map <Leader><Leader> :ZoomWin<CR>
 
-map <Leader>c <plug>NerdCommenterComment
+" NERDCommenter customization
+map <Leader>cc <plug>NERDCommenterToggle
+map <Leader>c<space> <plug>NERDCommenterComment
 
 " CTags
 map <Leader>rt :!ctags --extra=+f -R *<CR><CR>

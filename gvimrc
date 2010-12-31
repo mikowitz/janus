@@ -15,11 +15,15 @@ if has("gui_macvim")
   map <D-e> :call StartTerm()<CR>
 
   " Command-/ to toggle comments
-  map <D-/> <plug>NERDCommenterToggle<CR>
+  map <D-/> <plug>NERDCommenterToggle<space>
 
   " Command-][ to increase/decrease indentation
   vmap <D-]> >gv
   vmap <D-[> <gv
+
+  " or this...
+  vmap < <gv
+  vmap > >gv
 endif
 
 " Start without the toolbar
