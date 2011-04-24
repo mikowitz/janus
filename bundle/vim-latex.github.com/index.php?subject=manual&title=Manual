@@ -1,0 +1,184 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--
+index.php generates the html page using <table>'s to create the layout.
+Essentially, the HTML page has the following structure:
+
+--------------------%<--------------------
+<table>
+  <tr>
+    <td>$navigation_panel</td>
+    <td>$main_panel</td>
+  </tr>
+  <tr>
+    <td colspan=2>$footnote_panel</td>
+  </tr>
+</table>
+--------------------%<--------------------
+
+In the above structure, the various elements are formed as follows:
+
+1. $navigation_panel: This is simply done by including head.inc.
+
+2. $main_panel: This is formed via the subject key in the query to this
+   page. For example, if we call index.php as
+   	 index.php?subject=coding-style
+   then it will $main_panel will simply include coding-style.inc.
+
+   If no subject key is specified, then we include main.inc.
+
+   In addition, if a title is specified in the query, then it is used to
+   form the title of the HTML page.
+
+3. $footnote_panel is simply foot.inc.
+
+-->
+<html>
+<head>
+	<title>VIM-LaTeX Manual</title>
+	<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+	<meta http-equiv="content-Language" content="en-US">
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<table width=95% cellpadding="0" cellspacing="0" border="0" class="head">
+	<tr>
+		<td class=leftpanel>
+			<a href="index.php">
+			<img src="vim-latex.gif" alt="VIM The Editor" width="115" height="32" border="0">
+			</a><br>
+			<a href="index.php?subject=download&title=Download">Download</a><br>
+			<p></p>
+			<hr class=navig>
+			<div class=navheader>Documentation</div>
+			<a href="index.php?subject=manual&title=Manual#user-manual">User Manual</a><br>
+			<a href="index.php?subject=manual&title=LaTeX%20Reference#latex-reference">LaTeX Reference</a><br>
+			<a href="index.php?subject=faq&title=FAQ">FAQ</a><br>
+			<a href="index.php?subject=manual&title=Tutorial#tutorial">Tutorial</a><br>
+			<a href="index.php?subject=features&title=Features">Features</a><br>
+			<a href="index.php?subject=screenshots&title=Screenshots">Screenshots</a><br>
+			<p></p>
+			<hr class=navig>
+			<div class=navheader>Support</div>
+			<a href="index.php?subject=weare&title=People">We are ...<br>
+			<a
+			href="index.php?subject=contact&title=Contact">Feature
+			Requests <br/>Bug Reports <br/>Mailing List <br/></a><br>
+			<p></p>
+			<a href="http://vim-latex.svn.sourceforge.net/viewvc/vim-latex/trunk/vimfiles/ftplugin/latex-suite/packages/">Package files</a><br>
+			<a href="http://vim-latex.svn.sourceforge.net/viewvc/vim-latex/trunk/vimfiles/ftplugin/latex-suite/templates/">Templates</a><br>
+			<p></p>
+			<hr class=navig>
+			<div class=navheader>Developers</div>
+			<a href="http://vim-latex.svn.sourceforge.net/viewvc/vim-latex/">SVN Webinterface</a><br>
+			<a href="http://sourceforge.net/svn/?group_id=52322">SVN instructions</a><br>
+			<a href="index.php?subject=links&title=Links">Links</a><br>
+			<img src="blank.gif" height="150" width="1"><br>
+			<p class="doublesmall">
+			Site hosted by:<br>
+			<a href="http://sourceforge.net">
+				<img src="http://sourceforge.net/sflogo.php?group_id=52322&type=1" width="88" height="31" border="0" alt="SourceForge Logo">
+			</a><br>
+			<img src=vim_created.gif alt="Created with Vim" width="90" height="36">
+			</p>
+
+		</td>
+		<!-- main table will continue in index.php -->
+<!-- End of left navigation bar. -->
+
+<td class="mainpanel">
+<!-- Begin of Main Panel -->
+
+<h2 class="hline">Manual</h2>
+<a name="user-manual"></a>
+<h2>User Manual</h2>
+Documentation for Latex-Suite is available in the following formats:
+<ul>
+<li>
+	<a href="documentation/latex-suite/">Read online</a>.
+	These are a series of HTML files each describing a single section of the
+	manual. This should be the best for online reading.
+	<p></p>
+</li>
+<li>
+	<a href="documentation/latex-suite.html">Print for offline viewing</a>. This is a
+	single HTML file for printing.
+	<p></p>
+</li>
+<li>
+	<a href="documentation/latex-suite.txt">Native vim-help format</a>. This
+	file should be installed in <tt>~/.vim/doc/latex-suite.txt</tt> when you
+	install latex-suite.
+	<p>
+	This file can be viewed by doing <tt>:help latex-suite.txt</tt> from
+	within vim after downloading latex-suite and following the installation
+	instructions.
+	</p>
+	<p></p>
+</li>
+</ul>
+
+<a name="tutorial"></a>
+<h2>Beginner's tutorial</h2>
+There is a beginner's tutorial for Latex-suite available in the following
+formats:
+<ul>
+<li>
+	<a href="documentation/latex-suite-quickstart/">Read online</a>.
+	These are a series of HTML files each describing a single section of the
+	manual. This should be the best for online viewing.
+	<p></p>
+</li>
+<li>
+	<a href="documentation/latex-suite-quickstart.html">Print</a>.
+	This is a single HTML file for printing.
+	<p></p>
+</li>
+<li>
+	<a href="documentation/latex-suite-quickstart.txt">Native vim-help
+	format</a>. This file should be installed in
+	<tt>~/.vim/doc/latex-suite-quickstart.txt</tt> when you install latex-suite.
+	<p>
+	This file can be viewed by doing 
+	<tt>:help latex-suite-quickstart.txt</tt> 
+	from within vim after downloading latex-suite and following the
+	installation instructions.
+	</p>
+	<p></p>
+</li>
+</ul>
+
+<a name="latex-reference"></a>
+<h2>LaTeX Reference</h2>
+Latex-Suite comes ships with edition 1.6 of the LaTeX2e documentation
+translated into vim-help format. This file can be downloaded separately from
+Latex-Suite <a href="download/latexhelp.txt">here</a>. After downloading
+this file to <tt>~/.vim/doc</tt>, you will need to run the <tt>:helptags</tt>
+command from within vim to view LaTeX help from within Vim. 
+<p>
+Click <a href="download/latexhelp.html">here</a> for a quick peek at how this
+might look from within vim. (The color-scheme is of course specific to your
+preferences).  
+</p>
+<p>Type <tt>:help helptags</tt> from within Vim for more information</p>.
+
+<a name="vim-latex-ref-card"></a>
+<h2>Vim-Latex Reference Card</h2>
+Michael Goerz created a <a href="http://users.physik.fu-berlin.de/~mgoerz/blog/refcards/#latexsuite">a incomplete reference card for vim-latex key bindings</a>.
+
+
+<!-- End of Main Panel -->
+</td>
+</tr>
+<tr>
+<td colspan=2 class=footpanel>
+<!-- Begin of footer -->
+
+<a href="index.php?subject=contact&title=Contact">&copy;Vim-latexSuite&nbsp;Team&nbsp;2002</a>
+
+</td>
+</tr>
+</table>
+
+</body>
+</html>

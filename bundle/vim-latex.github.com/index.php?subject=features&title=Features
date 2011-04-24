@@ -1,0 +1,176 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<!--
+index.php generates the html page using <table>'s to create the layout.
+Essentially, the HTML page has the following structure:
+
+--------------------%<--------------------
+<table>
+  <tr>
+    <td>$navigation_panel</td>
+    <td>$main_panel</td>
+  </tr>
+  <tr>
+    <td colspan=2>$footnote_panel</td>
+  </tr>
+</table>
+--------------------%<--------------------
+
+In the above structure, the various elements are formed as follows:
+
+1. $navigation_panel: This is simply done by including head.inc.
+
+2. $main_panel: This is formed via the subject key in the query to this
+   page. For example, if we call index.php as
+   	 index.php?subject=coding-style
+   then it will $main_panel will simply include coding-style.inc.
+
+   If no subject key is specified, then we include main.inc.
+
+   In addition, if a title is specified in the query, then it is used to
+   form the title of the HTML page.
+
+3. $footnote_panel is simply foot.inc.
+
+-->
+<html>
+<head>
+	<title>VIM-LaTeX Features</title>
+	<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+	<meta http-equiv="content-Language" content="en-US">
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<table width=95% cellpadding="0" cellspacing="0" border="0" class="head">
+	<tr>
+		<td class=leftpanel>
+			<a href="index.php">
+			<img src="vim-latex.gif" alt="VIM The Editor" width="115" height="32" border="0">
+			</a><br>
+			<a href="index.php?subject=download&title=Download">Download</a><br>
+			<p></p>
+			<hr class=navig>
+			<div class=navheader>Documentation</div>
+			<a href="index.php?subject=manual&title=Manual#user-manual">User Manual</a><br>
+			<a href="index.php?subject=manual&title=LaTeX%20Reference#latex-reference">LaTeX Reference</a><br>
+			<a href="index.php?subject=faq&title=FAQ">FAQ</a><br>
+			<a href="index.php?subject=manual&title=Tutorial#tutorial">Tutorial</a><br>
+			<a href="index.php?subject=features&title=Features">Features</a><br>
+			<a href="index.php?subject=screenshots&title=Screenshots">Screenshots</a><br>
+			<p></p>
+			<hr class=navig>
+			<div class=navheader>Support</div>
+			<a href="index.php?subject=weare&title=People">We are ...<br>
+			<a
+			href="index.php?subject=contact&title=Contact">Feature
+			Requests <br/>Bug Reports <br/>Mailing List <br/></a><br>
+			<p></p>
+			<a href="http://vim-latex.svn.sourceforge.net/viewvc/vim-latex/trunk/vimfiles/ftplugin/latex-suite/packages/">Package files</a><br>
+			<a href="http://vim-latex.svn.sourceforge.net/viewvc/vim-latex/trunk/vimfiles/ftplugin/latex-suite/templates/">Templates</a><br>
+			<p></p>
+			<hr class=navig>
+			<div class=navheader>Developers</div>
+			<a href="http://vim-latex.svn.sourceforge.net/viewvc/vim-latex/">SVN Webinterface</a><br>
+			<a href="http://sourceforge.net/svn/?group_id=52322">SVN instructions</a><br>
+			<a href="index.php?subject=links&title=Links">Links</a><br>
+			<img src="blank.gif" height="150" width="1"><br>
+			<p class="doublesmall">
+			Site hosted by:<br>
+			<a href="http://sourceforge.net">
+				<img src="http://sourceforge.net/sflogo.php?group_id=52322&type=1" width="88" height="31" border="0" alt="SourceForge Logo">
+			</a><br>
+			<img src=vim_created.gif alt="Created with Vim" width="90" height="36">
+			</p>
+
+		</td>
+		<!-- main table will continue in index.php -->
+<!-- End of left navigation bar. -->
+
+<td class="mainpanel">
+<!-- Begin of Main Panel -->
+
+<h2 class="hline">Features</h2>
+Vim-Latex aims at providing a comprehensive set of tools so you can do all
+you lateking from within vim. Take a look at the <a
+href="index.php?subject=screenshots">screenshots</a> to see a typical
+working session with latex-suite. Here's a brief tour of the various
+features:
+<ul>
+<li><a href="documentation/latex-suite/latex-macros.html">Editing</a>
+	Latex-Suite ships with a very comprehensive set of insert mode and
+	visual mode mappings and menu items to typeset most of the LaTeX
+	elements. These range from 3 letter insert mode mappings which insert a
+	skeleton of common typesetting elements to visual mode mappings which
+	enclose the selected region in braces, parentheses, etc. The mappings
+	can also be accessed via the menus.
+	<p></p>
+</li>
+<li><a href="documentation/latex-suite/latex-compiling.html">Compiling</a> You
+	can compile the tex file from within vim. The list of errors is shown
+	in a quickfix window so you can directly go to the location of an
+	error. The compiler plugin can be dynamically reconfigured to show you
+	more or less warnings.<p></p>
+</li>
+<li><a href="documentation/latex-suite/latex-viewing.html">Viewing</a> By
+	pressing a key from within vim, the .dvi viewer is started up. You can
+	also do forward and inverse searching on your .dvi file from within
+	vim.<p></p>
+</li>
+<li><a href="documentation/latex-suite/latex-folding.html">Folding</a>
+	Latex-suite ships with the plugin SyntaxFolds.vim which is a plugin for
+	creating "fake" syntax folds on the fly. The fold method is actually
+	manual but the folding is based on LaTeX syntax. This offers a speed
+	increase over regular syntax folding.
+	When you open up a LaTeX file, all the portions will be automatically
+	folded up.<p></p>
+</li>
+<li><a href="documentation/latex-suite/latex-packages.html">Packages</a>
+	This module provides ways of customizing the menus based on which
+	packages are being used in the current LaTeX file. When latex-suite
+	first starts up, it scans the <a
+	href="documentation/latex-suite/latex-master-file.html">latex-master-file</a>
+	for <tt>\usepackage{name}</tt> lines and if the corresponding package
+	is found in the <tt>latex-suite/packages/</tt> directory, then creates
+	a sub-menu based on the specification found in that file. See <a
+	href="index.php?subject=packages">the list of currently supported
+	packages.</a><p></p>
+</li>
+<li><a href="download/latexhelp.txt">LaTeX help file</a>
+	Latex-suite ships with the standard texinfo file translated into vim
+	help format so that you can get help for common latex commands from
+	within vim.  You can view the HTML version of this file <a
+	href="download/latexhelp.html">here</a>.  <p></p>
+</li> 
+<li><a href="download/latex-suite.html#latex-dictionary">Dictionary</a> 
+	Latex-suite ships with a dictionary with over
+	600 LaTeX commands, which speeds up typing using the <tt>CTRL-X_d</tt>
+	command of vim.<p></p>
+</li>
+<li><a href="documentation/latex-suite/latex-suite-templates.html">Customized Templates</a> 
+	Latex-suite ships with some commonly used latex templates. It is
+	trivial to add your own templates.  The templates can contain dynamic
+	data such as time of creation etc.  See <a
+	href="index.php?subject=templates">list of current templates</a>.
+	<p></p>
+</li>
+<li><a href="documentation/latex-suite/custom-macros-menu.html">Customized Macros</a> 
+	Latex-suite makes it easy to add custom macros, again with the
+	possibility of dynamic content and automatic cursor placement. <p></p>
+</li>
+</ul>
+
+<!-- End of Main Panel -->
+</td>
+</tr>
+<tr>
+<td colspan=2 class=footpanel>
+<!-- Begin of footer -->
+
+<a href="index.php?subject=contact&title=Contact">&copy;Vim-latexSuite&nbsp;Team&nbsp;2002</a>
+
+</td>
+</tr>
+</table>
+
+</body>
+</html>

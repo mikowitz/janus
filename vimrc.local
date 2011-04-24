@@ -1,5 +1,11 @@
 set runtimepath+=/Applications/Lilypond.app/Contents/Resources/share/lilypond/current/vim/
 
+au BufRead,BufNewFile *.{ly,lyi} set ft=lilypond
+set t_Co=256
+
+" use the OSX clipboard
+"set clipboard=unnamed
+
 set hidden
 
 let mapleader=","
@@ -34,7 +40,8 @@ set guioptions-=T
 
 set relativenumber
 
-color ir_black
+color vividchalk
+"color ir_black
 
 " tab/space characters
 highlight NonText guifg=#4a4a59
@@ -143,3 +150,15 @@ endfunc
 
 :set noeol
 " :set binary
+function! GitGrep(args)                    " define our function as expecting some args that we'll hand off to git grep
+  cexpr system("git grep -n -i " . a:args) " create a quickfix list with the result of our grep
+  cw                                       " show quickfix window
+endfunction
+
+" define GG as a command taking n number of arguments
+" " that uses file names and directories on tab completion
+" " and ultimately calls GitGrep and passes in the args
+command! -nargs=+ -complete=file GG call GitGrep(<q-args>)
+"
+" " bind it
+map <leader>g :GG<space>
